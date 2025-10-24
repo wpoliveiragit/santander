@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/** Entidade Agency: representa uma agência com coordenadas X e Y. */
 @Entity
 @Data
 @NoArgsConstructor
