@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-key: "N7f8sQ2rL5vX9dP4kJ3mT6bR1uZ0aW8yE2cV7hF9gM1xQ3pK5nL0zS6tD4oB2r"
   datasource:
     url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
     driverClassName: org.h2.Driver
