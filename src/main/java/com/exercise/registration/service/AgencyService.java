@@ -41,6 +41,12 @@ public class AgencyService {
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1, LinkedHashMap::new));
   }
 
+
+
+
+
+
+
   /** Retorna todas as agências (do cache, se disponível). */
   @Cacheable(value = "agenciesCache")
   public List<AgencyEntity> listAgencies() {

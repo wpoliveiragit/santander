@@ -1,7 +1,9 @@
 # Santander- Desafio OSA
-[Link do desafio](DESAFIO.md)
+[Link do desafio](src/main/resources/doc/desafio.md)
 
 **Observação:** O projeto possui apenas o que foi solicitado e contendo convenções de programação
+
+- [] dasdas
 
 O projeto possui 3 endpoints
 
