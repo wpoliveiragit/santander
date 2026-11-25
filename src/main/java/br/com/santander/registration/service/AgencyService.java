@@ -1,12 +1,13 @@
-package com.exercise.registration.service;
+package br.com.santander.registration.service;
 
-import com.exercise.registration.repository.AgencyRepository;
-import com.exercise.registration.repository.entity.AgencyEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import br.com.santander.registration.repository.AgencyRepository;
+import br.com.santander.registration.repository.entity.AgencyEntity;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,7 +15,10 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-/** Serviço que gerencia o cadastro e cálculo de distâncias entre agências e usuários. */
+/**
+ * Serviço que gerencia o cadastro e cálculo de distâncias entre agências e
+ * usuários.
+ */
 @Service
 @RequiredArgsConstructor
 public class AgencyService {
@@ -34,18 +38,12 @@ public class AgencyService {
     List<AgencyEntity> agencies = listAgencies();
 
     return agencies.stream().collect(Collectors.toMap(//
-                entityModel -> "AGENCY_" + entityModel.getId(),// chave
-                entityModel -> euclideanDistance(userX, userY, entityModel.getPosX(), entityModel.getPosY())// valor
-            )//
-        ).entrySet().stream().sorted(Map.Entry.comparingByValue())//
+        entityModel -> "AGENCY_" + entityModel.getId(), // chave
+        entityModel -> euclideanDistance(userX, userY, entityModel.getPosX(), entityModel.getPosY())// valor
+    )//
+    ).entrySet().stream().sorted(Map.Entry.comparingByValue())//
         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1, LinkedHashMap::new));
   }
-
-
-
-
-
-
 
   /** Retorna todas as agências (do cache, se disponível). */
   @Cacheable(value = "agenciesCache")
@@ -60,7 +58,13 @@ public class AgencyService {
     System.out.println("⮌ AgenciesCache evicted (scheduled).");
   }
 
-  /** Calcula a distância euclidiana entre dois pontos cartesianos. <pre><code>√((x1 - x2)² + (y1 - y2)²)</code></pre> */
+  /**
+   * Calcula a distância euclidiana entre dois pontos cartesianos.
+   *
+   * <pre>
+   * <code>√((x1 - x2)² + (y1 - y2)²)</code>
+   * </pre>
+   */
   private double euclideanDistance(double userX, double userY, double entityX, double entityY) {
     double dx = userX - entityX;
     double dy = userY - entityY;

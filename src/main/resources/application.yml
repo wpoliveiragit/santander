@@ -1,23 +1,19 @@
-spring.profiles.active: dev
+spring.config.import: optional:file:.env[.properties]
 
-spring:
-  profiles:
-    active: local-dev
-  datasource:
-    url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
+spring.application.name: registration
+spring.profiles.active: local-dev
 
-spring.h2.console.enabled: true  # Habilita o console do H2
+spring.datasource.url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
+spring.datasource.driver-class-name: org.h2.Driver
+spring.datasource.username: sa
+spring.datasource.password:
+
+spring.jpa.hibernate.ddl-auto: update
+spring.jpa.show-sql: true
+
+spring.h2.console.enabled: true
 spring.h2.console.path: /h2-console
 
-server:
-  port: 8080
+server.port: ${SERVER_PORT:8080}
 
-cache:
-  type: caffeine
+cache.type: caffeine

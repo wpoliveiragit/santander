@@ -1,7 +1,7 @@
-package com.exercise.registration.repository;
+package br.com.santander.registration.repository;
 
-import com.exercise.registration.repository.entity.AgencyEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.santander.registration.repository.entity.AgencyEntity;
 
 public interface AgencyRepository extends JpaRepository<AgencyEntity, Long> {
 }

@@ -1,4 +1,4 @@
-package com.exercise.registration.controller;
+package br.com.santander.registration.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -18,18 +18,25 @@ import java.util.Map;
 public class AuthController {
 
   private final JwtEncoder encoder;
-  private final Instant instantNow = Instant.now();
 
   @PostMapping("/token")
   public Map<String, String> token(@RequestParam String username) {
 
-    System.out.println(Instant.now().toString());
+    Instant now = Instant.now();
+
+    System.out.println(now.toString());
+
     JwtClaimsSet claims = JwtClaimsSet.builder()
         .subject(username)
-        .issuedAt(instantNow)
-        .expiresAt(instantNow.plusSeconds(60))
+        .issuedAt(now)
+        .expiresAt(now.plusSeconds(3600))
         .claim("scope", "read write")
         .build();
-    return Map.of("access_token", encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue());
+
+    String token = encoder
+        .encode(JwtEncoderParameters.from(claims))
+        .getTokenValue();
+
+    return Map.of("access_token", token);
   }
 }

@@ -1,12 +1,13 @@
-package com.exercise.registration.controller;
+package br.com.santander.registration.controller;
 
-import com.exercise.registration.repository.entity.AgencyEntity;
-import com.exercise.registration.service.AgencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import br.com.santander.registration.repository.entity.AgencyEntity;
+import br.com.santander.registration.service.AgencyService;
 
 import java.util.Map;
 
@@ -26,7 +27,10 @@ public class AgencyController {
     return ResponseEntity.ok(saved);
   }
 
-  /** Retorna as distâncias do usuário para todas as agências. Requer o escopo de segurança "read". */
+  /**
+   * Retorna as distâncias do usuário para todas as agências. Requer o escopo de
+   * segurança "read".
+   */
   @GetMapping(value = "/distancia", produces = MediaType.APPLICATION_JSON_VALUE)
   @PreAuthorize("hasAuthority('SCOPE_read')")
   public ResponseEntity<Map<String, Double>> calculateDistance(@RequestParam double posX, @RequestParam double posY) {
