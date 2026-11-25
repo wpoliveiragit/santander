@@ -1,4 +1,4 @@
-package com.exercise.registration.config.security;
+package br.com.santander.registration.config.security;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -27,6 +27,7 @@ public class JwtTokenSecurity {
     // Gera um par de chaves RSA de 2048 bits
     KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
     keyPairGenerator.initialize(2048);
+
     KeyPair keyPair = keyPairGenerator.generateKeyPair();
 
     this.publicKey = (RSAPublicKey) keyPair.getPublic();
@@ -34,20 +35,17 @@ public class JwtTokenSecurity {
   }
 
   @Bean
-  public JwtDecoder jwtDecoder() {//valida
+  public JwtDecoder jwtDecoder() {// valida
     return NimbusJwtDecoder.withPublicKey(publicKey).build();
   }
 
   @Bean
   public JwtEncoder jwtEncoder() {// gera
-    return new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet(createImmutableJWKSet())));
-  }
-
-  private RSAKey createImmutableJWKSet() {
-    return new RSAKey.Builder(publicKey)//
-        .privateKey(privateKey)//
-        .keyID(UUID.randomUUID().toString())//
+    RSAKey rsaKey = new RSAKey.Builder(publicKey)
+        .privateKey(privateKey)
+        .keyID(UUID.randomUUID().toString())
         .build();
+    return new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet(rsaKey)));
   }
 
 }

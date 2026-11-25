@@ -1,4 +1,4 @@
-package com.exercise.registration.repository.entity;
+package br.com.santander.registration.repository.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
