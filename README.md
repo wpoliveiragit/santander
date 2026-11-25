@@ -2,9 +2,9 @@
 
 [Link do desafio](src/main/resources/doc/desafio.md)
 
-**Observação:** O projeto possui apenas o que foi solicitado e contendo convenções de programação
+## Prerequisitos
 
-- [] dasdas
+- [x] jdk 21 [Download](https://jdk.java.net/java-se-ri/21)
 
 ## Endpoints
 
