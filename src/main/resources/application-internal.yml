@@ -1,0 +1,12 @@
+## Propriedades internas do projeto ##
+
+## SECURITY
+# O token esta definido (default) para expirar em 5 min (300 segundos)
+# Para que o token não expirar, modifique o valor para -1
+app.security.jwt.expiration: ${JWT_TOKEN_EXPIRATION_SECONDS:1}
+
+## CACHE
+# 
+app.cache.expire-after-write: 5
+#
+app.cache.maximum-size: 10000

@@ -1,7 +1,10 @@
-spring.config.import: optional:file:.env[.properties]
+spring.config.import:
+  - optional:file:.env[.properties]
+  - classpath:application-internal.yml
 
 spring.application.name: registration
-spring.profiles.active: local-dev
+spring.profiles.active: ${SPRING_PROFILES_ACTIVE:local-dev}
+server.servlet.context-path: /pegasus/agency
 
 spring.datasource.url: jdbc:h2:mem:db;DB_CLOSE_DELAY=-1
 spring.datasource.driver-class-name: org.h2.Driver

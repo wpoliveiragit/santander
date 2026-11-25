@@ -1,8 +1,11 @@
-package br.com.santander.registration.config.security;
+package br.com.pegasus.registration.config.security;
 
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
@@ -17,6 +20,7 @@ import java.security.interfaces.RSAPublicKey;
 import java.util.UUID;
 
 /** JWT (JSON Web Token) */
+@Slf4j
 @Configuration
 public class JwtTokenSecurity {
 
@@ -36,7 +40,9 @@ public class JwtTokenSecurity {
 
   @Bean
   public JwtDecoder jwtDecoder() {// valida
-    return NimbusJwtDecoder.withPublicKey(publicKey).build();
+    NimbusJwtDecoder nimbusJwtDecoder = NimbusJwtDecoder.withPublicKey(publicKey).build();
+    log.info("generated jwtDecoder");
+    return nimbusJwtDecoder;
   }
 
   @Bean
@@ -45,7 +51,10 @@ public class JwtTokenSecurity {
         .privateKey(privateKey)
         .keyID(UUID.randomUUID().toString())
         .build();
-    return new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet(rsaKey)));
+
+    NimbusJwtEncoder nimbusJwtEncoder = new NimbusJwtEncoder(new ImmutableJWKSet<>(new JWKSet(rsaKey)));
+    log.info("generated jwtDecoder");
+    return nimbusJwtEncoder;
   }
 
 }

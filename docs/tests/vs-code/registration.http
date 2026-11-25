@@ -1,0 +1,25 @@
+# 1. Execute `Gerar token JWT` obter e armazenar o token das request. Este token
+
+@baseUrl = http://localhost:8080/pegasus/agency
+
+### 1. Gerar token JWT
+# @name login
+POST {{baseUrl}}/oauth/token
+Content-Type: application/x-www-form-urlencoded
+
+username=user
+
+### 2. Cadastrar agência
+POST {{baseUrl}}/desafio/cadastrar
+Content-Type: application/json
+Authorization: Bearer {{login.response.body.$.access_token}}
+
+{
+    "posX": 2,
+    "posY": 7
+}
+
+
+### 3. Consultar distâncias das agências
+GET {{baseUrl}}/desafio/distancia?posX=6&posY=5
+Authorization: Bearer {{login.response.body.$.access_token}}
