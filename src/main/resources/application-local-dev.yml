@@ -1,0 +1,2 @@
+spring.config.import:
+  - optional:file:_meta/tooling/environments/local-dev/.env[.properties]
