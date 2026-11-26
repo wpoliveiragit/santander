@@ -3,7 +3,10 @@
 ## SECURITY
 # O token esta definido (default) para expirar em 5 min (300 segundos)
 # Para que o token não expirar, modifique o valor para -1
+
 app.security.jwt.expiration: ${APP_SECURITY_JWT_EXPIRATION}
+
+app.security.public-endpoints: [/oauth/token, /v3/api-docs/**, /v3/api-docs.yaml, /swagger-ui/**, /swagger-ui.html]
 
 ## CACHE
 app.cache.expire-after-write: ${APP_CACHE_EXPIRE_AFTER_WRITE}

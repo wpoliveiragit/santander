@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.context.properties.bind.Bindable;
+import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.PropertySource;
 import org.springframework.stereotype.Component;
@@ -66,6 +68,7 @@ public class AppInfoConfig implements ApplicationRunner {
     logGroup("APPLICATION-INTERNAL.YML",
         "app.security.jwt.expiration",
         "app.cache.expire-after-write",
+        "app.security.public-endpoints",
         "app.cache.maximum-size");
   }
 
@@ -73,8 +76,16 @@ public class AppInfoConfig implements ApplicationRunner {
     System.out.println();
     log.info("== {} ==================", group);
     for (String property : properties) {
-      log.info("* {} = {}", property, environment.getProperty(property));
+      Object value = getPropertyValue(property);
+      log.info("* {} = {}", property, value);
     }
+  }
+
+  private Object getPropertyValue(String property) {
+    return Binder.get(environment)
+        .bind(property, Bindable.listOf(String.class))
+        .map(list -> String.join(", ", list))
+        .orElse(environment.getProperty(property));
   }
 
 }
