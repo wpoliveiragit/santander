@@ -79,7 +79,7 @@ public class AppInfoConfig implements ApplicationRunner {
       Object value = getPropertyValue(property);
       log.info("* {} = {}", property, value);
     }
-  }
+  } 
 
   private Object getPropertyValue(String property) {
     return Binder.get(environment)
